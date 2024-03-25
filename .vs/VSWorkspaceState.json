@@ -1,6 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Website",
+    "\\Website\\html5up-strongly-typed",
+    "\\Website\\html5up-strongly-typed\\assets",
+    "\\Website\\html5up-strongly-typed\\assets\\css",
+    "\\Website\\html5up-strongly-typed\\assets\\css\\images",
+    "\\Website\\html5up-strongly-typed\\assets\\js",
+    "\\Website\\html5up-strongly-typed\\assets\\sass",
+    "\\Website\\html5up-strongly-typed\\assets\\webfonts",
+    "\\Website\\html5up-strongly-typed\\images"
   ],
+  "SelectedNode": "\\Website\\html5up-strongly-typed\\assets\\css\\main.css",
   "PreviewInSolutionExplorer": false
 }
