@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="globals.css">
+        <title>RecipeMe</title>
+        <script>
+            window.onload = function() {
+                var tagWrappers = document.querySelectorAll('.tag');
+                tagWrappers.forEach(function(wrapper) {
+                    wrapper.addEventListener('click', function() {
+                    wrapper.classList.toggle('selected');
+                    });
+                });
+            };
+        </script>
+    </head>
+    <body>
+        <div id="navbar">
+            <a href="#default" class="bignavbutton">RecipeMe</a>
+            <div class="navbar-center">
+                <a href="home.html" class="bignavbutton" style="font-size: 20px;">Home</a>
+                <a href="search_page.html" class="bignavbutton" style="font-size: 20px;">Search</a>
+            </div>
+            <div id="navbar-right">
+                <a href="#account" class="bignavbutton" style="font-size: 20px;">Account</a>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="welcome-block">
+                <p>Find Recipes that suit YOU!</p>
+                <br>
+                <p>
+                    Using what is in the pantry can be difficult at times. Why not get creative? By using RecipeMe, 
+                    you have the ability to search recipes based on the ingredients based on what you have! 
+                    If you want to get more precise, we carry filtering options additional to the ingredients in 
+                    your own home from dieting to food allergies we consider all!
+                </p>
+            </div>
+
+        </div>
+        
+    </body>
+</html>
