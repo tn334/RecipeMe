@@ -24,20 +24,34 @@ body {
     font-family: "Roboto Condensed-Regular", Helvetica;
 }
 
-.navbutton {
+.bignavbutton {
     color: white;
     text-decoration: none;
     margin-left: 10px;
     font-size: 20px; /* Increased font size */
-    background-color: transparent;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
     cursor: pointer;
+    padding: 10px 20px; /* Added padding */
+    border-radius: 20px;
 }
 
-.navbutton:hover {
+.bignavbutton:hover {
     background-color: #f17c04;
+}
+
+
+
+#logo:hover {
+    color: white; /* Ensuring the text color changes on hover */
+}
+
+#navbar-right a:hover {
+    background-color: #f17c04;
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+
+#navbar-right a:hover {
+    color: white; /* Ensuring the text color changes on hover */
 }
 
 #search-bar-container {
@@ -155,4 +169,12 @@ body {
     background-position: center;
     z-index: -1;
     opacity: 0.5; /* Adjust opacity to make the image faded */
+}
+
+#search-bar-container {
+    margin-top: 50px; /* Add margin to the top */
+}
+
+#tag-clouds {
+    margin-top: 20px; /* Add margin to the top */
 }
