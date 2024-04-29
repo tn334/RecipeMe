@@ -2,12 +2,16 @@ import requests
 from bs4 import BeautifulSoup
 
 class RecipeScraper:
-    def __init__(self, url):
+    def __init__(self):
         """
         Initialize the scraper with the URL of the recipe
         """
-        self.url = url
-        self.soup = self.get_soup()
+        self.clear_dict()
+
+    def clear_dict(self):
+        """
+        Clears the dictionary of recipe info to ready for a new url to scrape
+        """
         self.recipe_info = {
             'title': '',
             'description': '',
@@ -20,7 +24,7 @@ class RecipeScraper:
             'yield': '',
             'ingredients': [],
             'directions': [],
-            'url': self.url
+            'url': ''
         }
 
     def get_soup(self):
@@ -30,10 +34,21 @@ class RecipeScraper:
         page = requests.get(self.url)
         return BeautifulSoup(page.text, 'html.parser')
 
-    def scrape(self):
+    def set_url(self, url):
+        """
+        Sets the url to scrape to the passed value, returns nothing
+        """
+        self.url = url
+        self.recipe_info['url'] = self.url
+
+
+    def scrape(self, url):
         """
         Runs the scraping functions to populate the recipe_info dictionary
         """
+        self.clear_dict()
+        self.set_url(url)
+        self.soup = self.get_soup()
         self.recipe_info['title'] = self.get_title()
         self.recipe_info['description'] = self.get_description()
         self.recipe_info['author'] = self.get_author()
@@ -97,7 +112,7 @@ class RecipeScraper:
         unit = ingredient_li.find('span', attrs={'data-ingredient-unit': 'true'}).text.strip()
         name = ingredient_li.find('span', attrs={'data-ingredient-name': 'true'}).text.strip()
         if not quantity and not unit:
-            return [name]
+            return ["N/A", name]
         return [f"{quantity} {unit}".strip(), name]
 
     def get_directions(self):
@@ -110,7 +125,7 @@ class RecipeScraper:
             directions_lis = directions_ol.find_all('li', class_='comp mntl-sc-block mntl-sc-block-startgroup mntl-sc-block-group--LI')
             for index, li in enumerate(directions_lis, start=1):
                 direction_text = ' '.join(p.get_text(strip=True) for p in li.find_all('p', recursive=False))
-                directions.append([f"Step {index}", direction_text])
+                directions.append(f"Step {index}: " + direction_text)
         return directions
 
     def format_recipe_info(self):
@@ -118,19 +133,3 @@ class RecipeScraper:
         Formats the recipe information into a more readable string output
         """
         return '\n'.join(f"{key}: {value}" for key, value in self.recipe_info.items())
-
-
-# List of recipe URLs to scrape
-urls = [
-    'https://www.allrecipes.com/recipe/218054/spicy-sausage-broccoli-rabe-parmesan/',
-    'https://www.allrecipes.com/recipe/188824/cheesy-sausage-pasta/',
-    'https://www.allrecipes.com/recipe/238691/simple-macaroni-and-cheese/',
-    'https://www.allrecipes.com/recipe/8527854/coconut-chickpea-curry/',
-    'https://www.allrecipes.com/black-pepper-chicken-recipe-8382732'
-]
-
-# Loop over each URL, create a scraper instance, then print the scraped data
-for url in urls:
-    scraper = RecipeScraper(url)
-    scraper.scrape()
-    print("\n" + "="*80 + "\n")
