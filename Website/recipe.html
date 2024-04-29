@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>RecipeMe</title>
+    <style>
+        /* Adjusted CSS for moving instructions to the right */
+.instructions {
+    width: 45%; /* Keep the same width */
+    margin-left: auto; /* Move instructions to the right */
+}
+        /* Adjusted CSS for moving instructions to the right */
+        .instructions {
+            width: calc(50% - 10px); /* Adjusted width */
+        }
+
+        /* Heart icon style */
+        .heart-icon {
+            width: 20px;
+            height: 20px;
+            fill: #d52e18; /* Heart color */
+            cursor: pointer;
+            transition: fill 0.3s;
+            vertical-align: middle; /* Aligns the heart icon vertically */
+        }
+
+        .heart-icon:hover {
+            fill: #f17c04; /* Hover color */
+        }
+
+        .heart-icon.empty {
+            fill: white; /* Empty heart color */
+        }
+
+        .heart-icon.clicked {
+            fill: #f17c04; /* Filled heart color */
+        }
+
+        /* Show the text "Add to Favorites" next to the heart icon */
+        .add-to-favorites {
+            display: inline-block;
+            vertical-align: middle; /* Aligns the text vertically with the heart icon */
+            margin-right: 5px; /* Adds a small gap between heart and text */
+        }
+
+        /* Align the heart and text to the right corner */
+        .heart-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <!-- navbar -->
+    <div id="navbar" style="height: 80px; padding: 20px;">
+        <a href="#default" class="bignavbutton">RecipeMe</a>
+        
+        <div id="navbar-center">
+            <a href="#" class="bignavbutton">Home</a>
+            <a href="search_page.html" class="bignavbutton">Search</a>
+        </div>
+
+        <div id="navbar-right">
+            <a href="#account" class="bignavbutton">Account</a>
+        </div>
+    </div>
+    <div class="background-image-container"></div>
+    <!-- Your big box here -->
+    <div class="big-box" style="width: 800px; height: 400px; background-color: #f0f0f0; border-radius: 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3); margin: 50px auto; padding: 20px;">
+        <div class="recipe-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>Recipe Name</h2>
+            <!-- Container for heart icon and text -->
+            <div class="heart-container">
+                <!-- "Add to Favorites" text -->
+                <span class="add-to-favorites">Add to Favorites</span>
+                <!-- Heart icon for adding to favorites -->
+                <svg class="heart-icon empty" viewBox="0 0 24 24" onclick="toggleHeart(this)">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="recipe-content" style="display: flex; margin-bottom: 20px;">
+            <div class="description" style="width: calc(50% - 10px); margin-right: 20px;">
+                <h3>Description</h3>
+                <p>This is a delicious recipe that you'll love!</p>
+            </div>
+            <div class="ingredients" style="width: calc(50% - 10px);">
+                <h3>Ingredients</h3>
+                <ul>
+                    <li>Ingredient 1</li>
+                    <li>Ingredient 2</li>
+                    <li>Ingredient 3</li>
+                    <!-- Add more ingredients here -->
+                </ul>
+            </div>
+        </div>
+        <div class="instructions" style="width: calc(50% - 10px);">
+            <h3>Instructions</h3>
+            <ol>
+                <li>Instruction 1</li>
+                <li>Instruction 2</li>
+                <li>Instruction 3</li>
+                <!-- Add more instructions here -->
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function toggleHeart(heart) {
+            heart.classList.toggle("clicked");
+            heart.classList.toggle("empty");
+        }
+    </script>
+</body>
+</html>
