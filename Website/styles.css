@@ -181,7 +181,6 @@ body {
 .box {
     width: 1198px;
     height: 281px;
-    background-image: url('test.jpg');
   }
   
 .box .welcome-block {
@@ -192,6 +191,7 @@ body {
     top: 25%;
     left: 25%;
     border-radius: 24px;
+    z-index: 1;
 }
 
 .welcome-block p {
