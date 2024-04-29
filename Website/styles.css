@@ -178,3 +178,24 @@ body {
 #tag-clouds {
     margin-top: 20px; /* Add margin to the top */
 }
+.box {
+    width: 1198px;
+    height: 281px;
+  }
+  
+.box .welcome-block {
+    background-color: #FCFBF4;
+    position: fixed;
+    width: 800px;
+    height: 300px;
+    top: 25%;
+    left: 25%;
+    border-radius: 24px;
+}
+
+.welcome-block p {
+    text-align: center;
+    color:  #d52e18;
+    font-family: "Roboto Condensed", Helvetica;
+    font-size: 18px;
+}
