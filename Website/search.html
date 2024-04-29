@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="styles.css">
-        <script>
-            window.onload = function() {
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #search-bar-container {
+            margin-top: 50px; /* Add margin to the top */
+        }
+
+        #tag-clouds {
+            margin-top: 20px; /* Add margin to the top */
+        }
+    </style>
+    <script>
+        window.onload = function() {
             var tagWrappers = document.querySelectorAll('.tag');
             tagWrappers.forEach(function(wrapper) {
                 wrapper.addEventListener('click', function() {
@@ -11,36 +20,35 @@
                 });
             });
         };
-        </script>
-        <title>RecipeMe</title>
-    </head>
-    <body>
-        <!-- navbar -->
-        <div id="navbar">
-            <a href="#default" id="logo">RecipeMe</a>
-            <div class="navbar-center">
-                <button onclick="location.href='home.html'" class="navbutton">Home</button>
-                <button onclick="location.href='search.html'" class="navbutton">Search</button>
-                <button onclick="location.href='browse.html'" class="navbutton">Browse</button>
-            </div>
-            <div id="navbar-right">
-                <a href="#account"  class="navbutton">Account</a>
-            </div>
+    </script>
+    <title>RecipeMe</title>
+</head>
+<body>
+    <!-- navbar -->
+    <div id="navbar">
+        <a href="#default" class="bignavbutton">RecipeMe</a>
+        <div class="navbar-center">
+            <a href="#" class="bignavbutton" style="font-size: 20px;">Home</a>
+            <a href="search_page.html" class="bignavbutton" style="font-size: 20px;">Search</a>
         </div>
-        <div id="search-bar-container">
-            <input type="text" id="search-bar" placeholder="Search recipes..."/>
-            <button type="button" id="search-button">Search</button>
+        <div id="navbar-right">
+            <a href="#account" class="bignavbutton" style="font-size: 20px;">Account</a>
         </div>
+    </div>
+    <div id="search-bar-container">
+        <input type="text" id="search-bar" placeholder="Search recipes..."/>
+        <button type="button" id="search-button">Search</button>
+    </div>
 
-            <div id="tag-clouds">
-                <a href="#" class="tag">vegetarian</a>
-                <a href="#" class="tag">gluten-free</a>
-                <a href="#" class="tag">Chinese</a>
-                <a href="#" class="tag">Mexican</a>
-                <a href="#" class="tag">dairy-free</a>
-                <a href="#" class="tag">pasta</a>
-                <a href="#" class="tag">keto-friendly</a>
-                <a href="#" class="tag">chicken</a>
-            </div>
-    </body>
+    <div id="tag-clouds">
+        <a href="#" class="tag">vegetarian</a>
+        <a href="#" class="tag">gluten-free</a>
+        <a href="#" class="tag">Chinese</a>
+        <a href="#" class="tag">Mexican</a>
+        <a href="#" class="tag">dairy-free</a>
+        <a href="#" class="tag">pasta</a>
+        <a href="#" class="tag">keto-friendly</a>
+        <a href="#" class="tag">chicken</a>
+    </div>
+</body>
 </html>
