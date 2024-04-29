@@ -120,7 +120,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 150vh; /* Adjust as needed */
+    height: 100vh; /* Adjust as needed */
 }
 
 /* Box container styles */
