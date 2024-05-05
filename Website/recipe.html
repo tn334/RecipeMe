@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href= "{{ url_for('static',filename='styles.css') }}">
     <title>RecipeMe</title>
     <style>
         /* Adjusted CSS for moving instructions to the right */
@@ -57,19 +57,19 @@
         <a href="#default" class="bignavbutton">RecipeMe</a>
         
         <div id="navbar-center">
-            <a href="home.html" class="bignavbutton">Home</a>
-            <a href="search.html" class="bignavbutton">Search</a>
+            <a href="home" class="bignavbutton">Home</a>
+            <a href="search" class="bignavbutton">Search</a>
         </div>
 
         <div id="navbar-right">
-            <a href="account.html" class="bignavbutton">Account</a>
+            <a href="account" class="bignavbutton">Account</a>
         </div>
     </div>
     <div class="background-image-container"></div>
     <!-- Your big box here -->
     <div class="big-box" style="width: 800px; height: 500px; background-color: #f0f0f0; border-radius: 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3); margin: 50px auto; padding: 20px;">
         <div class="recipe-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h2>Recipe Name <br>Author of Recipe: <br>URL of Recipe: </h2>
+            <h2>{{ recipe.get_name() }}<br>Author of Recipe: {{ recipe.get_author() }}<br>URL of Recipe: {{ recipe.get_url() }}</h2>
             
             <!-- Container for heart icon and text -->
             <div class="heart-container">
@@ -84,26 +84,22 @@
         <div class="recipe-content" style="display: flex; margin-bottom: 20px;">
             <div class="description" style="width: calc(50% - 10px); margin-right: 20px;">
                 <h3>Description</h3>
-                <p>This is a delicious recipe that you'll love!</p>
+                <p>{{ recipe.get_description() }}</p>
             </div>
             <div class="ingredients" style="width: calc(50% - 10px);">
                 <h3>Ingredients</h3>
                 <ul>
-                    <li>Ingredient 1</li>
-                    <li>Ingredient 2</li>
-                    <li>Ingredient 3</li>
-                    <!-- Add more ingredients here -->
+                    {% for ingredient in recipe.get_ingredients() %}
+                    <li>{{ ingredient }}</li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
         <div class="instructions" style="width: calc(50% - 10px);">
             <h3>Instructions</h3>
-            <ol>
-                <li>Instruction 1</li>
-                <li>Instruction 2</li>
-                <li>Instruction 3</li>
-                <!-- Add more instructions here -->
-            </ol>
+            <p>
+                {{ recipe.get_steps() }}
+            </p>
         </div>
     </div>
 
