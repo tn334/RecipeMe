@@ -3,12 +3,12 @@ from urllib.parse import urlparse  # Import urlparse function
 import os
 from database_connector import Connection
 from recipe_object import Recipe
-from run_scraper import runScraper
+from run_scraper import run_scraper
 from user_object import User
 from apscheduler.schedulers.background import BackgroundScheduler
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(runScraper,'interval',minutes=60*6)
+sched.add_job(run_scraper,'interval',minutes=60*6)
 sched.start()
 
 template_dir = os.path.abspath('../Website')
@@ -52,10 +52,6 @@ def home():
 @app.route('/account')
 def account():
     return render_template('account.html')
-
-@app.route('/login')
-def login():
-    return render_template('login.html')
 
 @app.route('/recipe')
 @app.route('/recipe/<recipe_id>')

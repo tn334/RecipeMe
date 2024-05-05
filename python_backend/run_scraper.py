@@ -1,7 +1,6 @@
 from recipe_factory import RecipeFactory
 from recipe_object import Recipe
-from scrape_recipe import RecipeScraper, all_recipe_strategy
-
+from scrape_recipe import RecipeScraper, AllRecipesStrategy
 
 def run_scraper():
     # List of recipe URLs to scrape
@@ -24,8 +23,8 @@ def run_scraper():
     ]
 
     # Loop over each URL, create a scraper instance, then print the scraped data
-    all_recipe_strategy = all_recipe_strategy()
-    scraper = RecipeScraper(strategy=all_recipe_strategy)
+    AllRecipesStrategy = AllRecipesStrategy()
+    scraper = RecipeScraper(strategy=AllRecipesStrategy)
     factory = RecipeFactory()
     ids = []
     for url in urls:
