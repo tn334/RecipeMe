@@ -1,3 +1,5 @@
+from database_connector import Connection
+
 def suggest_recipes(user_favorites, user_tags, recipe_database):
     suggested_recipes = []
 
@@ -12,7 +14,7 @@ def suggest_recipes(user_favorites, user_tags, recipe_database):
     suggested_recipes = list(set(suggested_recipes))
 
     # Rank suggested recipes based on relevance
-    ranked_recipes = rank_recipes(suggested_recipes, user_favorites)
+    ranked_recipes = rank_recipes(suggested_recipes, user_tags)
 
     # Return top suggestions
     return ranked_recipes[:10]
@@ -20,12 +22,12 @@ def suggest_recipes(user_favorites, user_tags, recipe_database):
 def find_similar_recipes(favorite_recipe, recipe_database):
     similar_recipes = []
     # Find similar recipes based on shared ingredients or tags
-    for ingredient_id in favorite_recipe.ingredients:
+    for ingredients in favorite_recipe.get_ingredients():
         # Fetch recipes containing the same ingredient
-        similar_recipes.extend(recipe_database.get_recipes_by_ingredient(ingredient_id))
-    for tag in favorite_recipe.tags:
+        similar_recipes.extend(recipe_database.get_recipes_by_ingredient(ingredients))
+    for author in favorite_recipe.author:
         # Fetch recipes with similar tags
-        similar_recipes.extend(recipe_database.get_recipes_by_tag(tag))
+        similar_recipes.extend(recipe_database.get_author(author))
 
     return similar_recipes
 

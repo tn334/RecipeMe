@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from urllib.parse import urlparse  # Import urlparse function
 import os
+from database_connector import Connection
 from recipe_object import Recipe
 from run_scraper import runScraper
+from user_object import User
 from apscheduler.schedulers.background import BackgroundScheduler
 
 sched = BackgroundScheduler(daemon=True)
@@ -12,6 +14,32 @@ sched.start()
 template_dir = os.path.abspath('../Website')
 
 app = Flask(__name__, template_folder=template_dir, static_folder=template_dir+'/static')
+
+#define route for user login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        # Instantiate connection
+        db_conn = Connection()
+
+        # Create a User object
+        user = User()
+
+        # Attempt to authenticate the user
+        if user.load(user='root', pwd='Cs440', email=email):
+            if user.get_password() == password:
+                # If authentication successful, redirect to home page
+                return redirect(url_for('home'))
+        
+        # If authentication fails, render login page with an error message
+        error_message = "Invalid email or password. Please try again."
+        return render_template('login.html', error_message=error_message)
+
+    # If request method is GET, render the login page
+    return render_template('login.html')
 
 @app.route('/')
 def index():
