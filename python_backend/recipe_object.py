@@ -113,7 +113,7 @@ class Recipe:
         return (rowsAffected == 1)
 
 
-    def load(self, id, user, pwd):
+    def load(self, user, pwd, id):
         dbConn = Connection( user = user, pwd = pwd, db = "recipe_me" )
         queryString = "SELECT * FROM recipe WHERE recipe_id = %s;"
         queryValues = [id]

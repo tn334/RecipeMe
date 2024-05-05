@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href= "{{ url_for('static',filename='styles.css') }}">
     <style>
         #search-bar-container {
             margin-top: 50px; /* Add margin to the top */
@@ -28,11 +28,11 @@
     <div id="navbar">
         <a href="#default" class="bignavbutton">RecipeMe</a>
         <div class="navbar-center">
-            <a href="home.html" class="bignavbutton" style="font-size: 20px;">Home</a>
-            <a href="search.html" class="bignavbutton" style="font-size: 20px;">Search</a>
+            <a href="home" class="bignavbutton" style="font-size: 20px;">Home</a>
+            <a href="search" class="bignavbutton" style="font-size: 20px;">Search</a>
         </div>
         <div id="navbar-right">
-            <a href="account.html" class="bignavbutton" style="font-size: 20px;">Account</a>
+            <a href="account" class="bignavbutton" style="font-size: 20px;">Account</a>
         </div>
     </div>
     <div id="search-bar-container">

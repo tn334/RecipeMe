@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href= "{{ url_for('static',filename='styles.css') }}">
     <title>RecipeMe</title>
 </head>
 <body>
@@ -11,7 +11,7 @@
         
         <div id="navbar-center">
             <a href="#" class="bignavbutton" style="font-size: 20px;">Home</a>
-            <a href="search.html" class="bignavbutton" style="font-size: 20px;">Search</a>
+            <a href="search" class="bignavbutton" style="font-size: 20px;">Search</a>
         </div>
 
         <div id="navbar-right">
@@ -35,12 +35,12 @@
                         <br><input type="password" class="form-control" id="password" placeholder="Enter password" required>
                     </div>
                     <div class="form-group" style="margin-top: 20px;">
-                        <a href="account.html"><button type="submit" class="btn btn-primary btn-block" style="font-size: 20px;">Login</button></a>
+                        <a href="account"><button type="submit" class="btn btn-primary btn-block" style="font-size: 20px;">Login</button></a>
                     </div>
                 </form>  
                 <p class="text-center mt-2 mb-3" style="font-size: 20px;"><label>Don’t have an account? Click Below!</label></p>
                 <div class="form-group" style="margin-top: 20px;">
-                    <a href="sign_up.html"><button type="button" class="btn btn-primary btn-block" style="font-size: 20px;">Sign Up</button></a>
+                    <a href="sign_up"><button type="button" class="btn btn-primary btn-block" style="font-size: 20px;">Sign Up</button></a>
                 </div>
             </div>
         </div>
