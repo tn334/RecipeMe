@@ -74,7 +74,7 @@ class AllRecipesStrategy(ScrapeStrategy):
         scraper.recipe_info['title'] = self.get_title()
         scraper.recipe_info['description'] = self.get_description()
         scraper.recipe_info['author'] = self.get_author()
-        self.scrape_details()
+        self.scrape_details(scraper)
         scraper.recipe_info['ingredients'] = self.get_ingredients()
         scraper.recipe_info['directions'] = self.get_directions()
         print(self.format_recipe_info())
@@ -102,7 +102,7 @@ class AllRecipesStrategy(ScrapeStrategy):
         author_a = self.soup.find('a', class_='mntl-attribution__item-name')
         return author_a.text.strip() if author_a else 'Author not found'
 
-    def scrape_details(self, scraper):
+    def scrape_details(self, scraper = None):
         """
         Extracts recipe details like cook time, total time, servings, etc.
         """
@@ -152,7 +152,7 @@ class AllRecipesStrategy(ScrapeStrategy):
     
 
 class RecipeScraper:
-    def __init__(self, strategy=ScrapeStrategy()):
+    def __init__(self, strategy=AllRecipesStrategy()):
         """
         Initialize the scraper with the URL of the recipe
         """
@@ -192,7 +192,7 @@ class RecipeScraper:
         self.url = url
         self.recipe_info['url'] = self.url
 
-    def scrapeWithStrategy(self, url):
+    def scrape_with_strategy(self, url):
         """
         Scrapes a given url employing the strategy used to init
         """

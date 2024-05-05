@@ -13,8 +13,6 @@ template_dir = os.path.abspath('../Website')
 
 app = Flask(__name__, template_folder=template_dir, static_folder=template_dir+'/static')
 
-#scraper = RecipeScraper()
-
 @app.route('/')
 def index():
     return render_template('home.html')
@@ -34,10 +32,10 @@ def login():
 @app.route('/recipe')
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id=None):
-    recipeObject = Recipe()
-    recipeObject.load('root', 'Cs440', recipe_id)
-    #recipeObject.print_out()
-    return render_template('recipe.html', recipe=recipeObject)
+    recipe_object = Recipe()
+    recipe_object.load('root', 'Cs440', recipe_id)
+    #recipe_object.print_out()
+    return render_template('recipe.html', recipe=recipe_object)
 
 @app.route('/search')
 def search():
