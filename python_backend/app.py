@@ -2,6 +2,22 @@ from flask import Flask, render_template, request
 from urllib.parse import urlparse  # Import urlparse function
 import os
 from recipe_object import Recipe
+from run_scraper import runScraper
+from apscheduler.schedulers.background import BackgroundScheduler
+
+sched = BackgroundScheduler(daemon=True)
+sched.add_job(runScraper,'interval',minutes=60*6)
+sched.start()
+
+app = Flask(__name__)
+
+@app.route("/home")
+def home():
+    """ Function for test purposes. """
+    return "Welcome Home :) !"
+
+if __name__ == "__main__":
+    app.run()
 
 template_dir = os.path.abspath('../Website')
 
