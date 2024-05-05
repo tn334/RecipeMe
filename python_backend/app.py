@@ -9,16 +9,6 @@ sched = BackgroundScheduler(daemon=True)
 sched.add_job(runScraper,'interval',minutes=60*6)
 sched.start()
 
-app = Flask(__name__)
-
-@app.route("/home")
-def home():
-    """ Function for test purposes. """
-    return "Welcome Home :) !"
-
-if __name__ == "__main__":
-    app.run()
-
 template_dir = os.path.abspath('../Website')
 
 app = Flask(__name__, template_folder=template_dir, static_folder=template_dir+'/static')
