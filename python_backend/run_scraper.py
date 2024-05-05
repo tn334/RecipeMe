@@ -1,9 +1,9 @@
 from recipe_factory import RecipeFactory
 from recipe_object import Recipe
-from scrape_recipe import RecipeScraper, AllRecipesStrategy
+from scrape_recipe import RecipeScraper, all_recipe_strategy
 
 
-def runScraper():
+def run_scraper():
     # List of recipe URLs to scrape
     urls = [
         'https://www.allrecipes.com/recipe/218054/spicy-sausage-broccoli-rabe-parmesan/',
@@ -24,17 +24,17 @@ def runScraper():
     ]
 
     # Loop over each URL, create a scraper instance, then print the scraped data
-    allRecipesStrategy = AllRecipesStrategy()
-    scraper = RecipeScraper(strategy=allRecipesStrategy)
+    all_recipe_strategy = all_recipe_strategy()
+    scraper = RecipeScraper(strategy=all_recipe_strategy)
     factory = RecipeFactory()
     ids = []
     for url in urls:
         scraper.scrape(url)
-        newRecipe = factory.makeRecipe(scraper.recipe_info)
-        newRecipe.save('root', 'Cs440')
-        ids.append(newRecipe.get_id())
+        new_recipe = factory.makeRecipe(scraper.recipe_info)
+        new_recipe.save('root', 'Cs440')
+        ids.append(new_recipe.get_id())
 
     for id in ids:
-        newRecipe = Recipe()
-        newRecipe.load(id, 'root', 'Cs440')
-        newRecipe.print_out()
+        new_recipe = Recipe()
+        new_recipe.load(id, 'root', 'Cs440')
+        new_recipe.print_out()
