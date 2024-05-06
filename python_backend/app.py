@@ -69,15 +69,37 @@ def search():
 def signup():
     return render_template('sign_up.html')
 
-#@app.route('/search', methods=['GET', 'POST'])
-#def search():
-    #if request.method == 'POST':
-        #search_query = request.form.get('search_query')
-        #if urlparse(search_query).scheme == '':
-            #search_query = f'https://www.google.com/search?q={search_query}'
-        #return render_template('search.html', recipe_info=recipe_info)
-    #else:
-        #return render_template('search.html')
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        # Handle the POST request
+        search_query = request.form.get('search_query')
+        selected_tags = request.form.getlist('tags[]')
+
+        db_conn = Connection(user='root', pwd='IhAtEtHiS!22', db='recipe_me')
+        query_string = "SELECT recipe_id, name FROM recipe WHERE name LIKE %s"
+        query_values = ['%' + search_query + '%']
+        if selected_tags:
+          query_string += " AND recipe_id IN (SELECT DISTINCT r.recipe_id FROM recipe r INNER JOIN recipe_tags rt ON r.recipe_id = rt.recipe_id INNER JOIN tag t ON rt.tag_id = t.tag_id WHERE t.tag_name IN (%s))"
+          query_values.extend(selected_tags)
+        search_results = db_conn.run_query(query_string, query_values)
+
+        recipes = []
+        for recipe_id, recipe_name in search_results:
+            recipe = Recipe()
+            recipe.load('root', 'IhAtEtHiS!22', recipe_id)
+            recipes.append(recipe)
+        # Perform any necessary logic with the search query
+        # For example, you can redirect to the recipe page based on the search query
+        return redirect(url_for('recipe', recipes=recipes))
+    else:
+        # Handle the GET request
+        # Fetch tag data from the database and render the search page
+        db_conn = Connection(user='root', pwd='IhAtEtHiS!22', db='recipe_me')
+        query_string = "SELECT tag_name, description FROM tag;"
+        tag_data = db_conn.run_query(query_string, [])
+        tag_objects = [Tag(tag_name=name, description=description) for name, description in tag_data]
+        return render_template('search.html', tag_options=tag_objects)
 
 if __name__ == "__main__":
     app.run(debug=True)
