@@ -126,6 +126,14 @@ class Recipe:
                 self.set_url(url)
                 self.set_author(author)
                 self.set_steps(steps)
+                # Print statements for debugging
+                print("Loaded recipe:")
+                print("ID:", recipe_id)
+                print("Name:", name)
+                print("Description:", description)
+                print("URL:", url)
+                print("Author:", author)
+                print("Steps:", steps)
             query_string = "SELECT ri.quantity, ri.description, i.ingredient_name FROM recipe_ingredients ri INNER JOIN ingredient i ON ri.called_ingredient = i.ingredient_id WHERE calling_recipe = %s;"
             query_values = [id]
             ingredient_result = db_conn.run_query(query_string, query_values)
@@ -135,6 +143,11 @@ class Recipe:
                     if description != '':
                         ingredient_name += ","+description
                     ingredient_list.append([quantity, ingredient_name])
+                    # Print statements for debugging
+                    print("Loaded ingredient:")
+                    print("Quantity:", quantity)
+                    print("Description:", description)
+                    print("Ingredient name:", ingredient_name)
                 self.set_ingredients(ingredient_list)
             return True
 
