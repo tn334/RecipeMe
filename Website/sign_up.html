@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href= "{{ url_for('static',filename='styles.css') }}">
     <title>RecipeMe</title>
 </head>
 <body>
@@ -10,12 +10,12 @@
         <a href="#default" class="bignavbutton">RecipeMe</a>
         
         <div id="navbar-center">
-            <a href="home.html" class="bignavbutton" style="font-size: 20px;">Home</a>
-            <a href="search.html" class="bignavbutton" style="font-size: 20px;">Search</a>
+            <a href="home" class="bignavbutton" style="font-size: 20px;">Home</a>
+            <a href="search" class="bignavbutton" style="font-size: 20px;">Search</a>
         </div>
 
         <div id="navbar-right">
-            <a href="account.html" class="bignavbutton" style="font-size: 20px;">Account</a>
+            <a href="account" class="bignavbutton" style="font-size: 20px;">Account</a>
         </div>
     </div>
 
@@ -38,12 +38,12 @@
                         <br><input type="password" class="form-control" id="password" placeholder="Enter password" required>
                     </div>
                     <div class="form-group" style="margin-top: 20px;">
-                        <a href="account.html"><button type="submit" class="btn btn-primary btn-block" style="font-size: 20px;">Create account</button></a>
+                        <a href="account"><button type="submit" class="btn btn-primary btn-block" style="font-size: 20px;">Create account</button></a>
                     </div>
                 </form>  
                 <p class="text-center mt-2 mb-3" style="font-size: 20px;"><label>Already have an account? Click Below!</label></p>
                 <div class="form-group" style="margin-top: 20px;">
-                    <a href="login.html"><button type="button" class="btn btn-primary btn-block" style="font-size: 20px;">Login</button></a>
+                    <a href="login"><button type="button" class="btn btn-primary btn-block" style="font-size: 20px;">Login</button></a>
                 </div>
             </div>
         </div>

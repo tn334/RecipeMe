@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href= "{{ url_for('static',filename='styles.css') }}">
         <link rel="stylesheet" href="globals.css">
         <title>RecipeMe</title>
         <script>
@@ -17,15 +17,15 @@
     </head>
     <body>
         <div id="navbar">
-            <a href="#default" class="bignavbutton">RecipeMe</a>
+            <a class="bignavbutton">RecipeMe</a>
             <div class="navbar-center">
-                <a href="home.html" class="bignavbutton" style="font-size: 20px;">Home</a>
-                <a href="search.html" class="bignavbutton" style="font-size: 20px;">Search</a>
-                <a href="recipe.html" class="bignavbutton" style="font-size: 20px;">Recipes</a>
+                <a href="home" class="bignavbutton" style="font-size: 20px;">Home</a>
+                <a href="search" class="bignavbutton" style="font-size: 20px;">Search</a>
+                <a href="recipe" class="bignavbutton" style="font-size: 20px;">Recipes</a>
             </div>
             <div id="navbar-right">
-                <a href="login.html" class="bignavbutton" style="font-size: 20px;">Sign In/Sign Up</a>
-                <a href="account.html" class="bignavbutton" style="font-size: 20px;">Account</a>
+                <a href="login" class="bignavbutton" style="font-size: 20px;">Login</a>
+                <a href="account" class="bignavbutton" style="font-size: 20px;">Account</a>
             </div>
         </div>
         <div class="background-image-container"></div>

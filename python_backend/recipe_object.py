@@ -8,10 +8,10 @@ class Recipe:
         self.__url = url
         self.__author = author
         self.__ingredients = ingredients
-        allSteps = ""
+        all_steps = ""
         for step in steps:
-            allSteps += step + "\n"
-        self.__steps = allSteps
+            all_steps += step + "\n"
+        self.__steps = all_steps
 
 
     def set_id(self, id):
@@ -64,78 +64,78 @@ class Recipe:
         print("steps: ", self.get_steps())
 
     def save(self, user, pwd):
-        rowsAffected = 0
-        saveConn = Connection( user = user, pwd = pwd, db = "recipe_me" )
-        queryString = "SELECT recipe_id FROM recipe WHERE origin_url = %s;"
-        queryValues = [self.get_url()]
-        queryResult = saveConn.run_query(queryString, queryValues)
-        if (queryResult == []):
-            insertString = "INSERT INTO recipe (name, description, origin_url, author, steps) VALUES (%s, %s, %s, %s, %s);"
-            insertValues = [self.get_name(), self.get_description(), self.get_url(), self.get_author(), self.get_steps()]
-            rowsAffected = saveConn.run_modify(insertString, insertValues)
-            if (rowsAffected == 1):
-                queryString = "SELECT recipe_id FROM recipe WHERE origin_url = %s;"
-                queryValues = [self.get_url()]
-                recipeID = saveConn.run_query(queryString, queryValues)[0][0]
-                self.set_id(recipeID)
+        rows_affected = 0
+        save_conn = Connection( user = user, pwd = pwd, db = "recipe_me" )
+        query_string = "SELECT recipe_id FROM recipe WHERE origin_url = %s;"
+        query_values = [self.get_url()]
+        query_result = save_conn.run_query(query_string, query_values)
+        if (query_result == []):
+            insert_string = "INSERT INTO recipe (name, description, origin_url, author, steps) VALUES (%s, %s, %s, %s, %s);"
+            insert_values = [self.get_name(), self.get_description(), self.get_url(), self.get_author(), self.get_steps()]
+            rows_affected = save_conn.run_modify(insert_string, insert_values)
+            if (rows_affected == 1):
+                query_string = "SELECT recipe_id FROM recipe WHERE origin_url = %s;"
+                query_values = [self.get_url()]
+                recipe_id = save_conn.run_query(query_string, query_values)[0][0]
+                self.set_id(recipe_id)
                 for ingredient in self.get_ingredients():
                     if ',' in ingredient[1]:
-                        ingredientName, ingredientDescription = ingredient[1].split(',')
+                        ingredient_name, ingredient_description = ingredient[1].split(',')
                     else:
-                        ingredientName = ingredient[1]
-                        ingredientDescription = ''
+                        ingredient_name = ingredient[1]
+                        ingredient_description = ''
                     
-                    queryString = "SELECT ingredient_id FROM ingredient WHERE ingredient_name = %s;"
-                    queryValues = [ingredientName]
-                    queryResult = saveConn.run_query(queryString, queryValues)
-                    if (queryResult == []):
-                        insertString = "INSERT INTO ingredient (ingredient_name) VALUES (%s);"
-                        insertValues = [ingredientName]
-                        saveConn.run_modify(insertString, insertValues)
-                        queryString = "SELECT ingredient_id FROM ingredient WHERE ingredient_name = %s;"
-                        queryValues = [ingredientName]
-                        queryResult = saveConn.run_query(queryString, queryValues)
-                    ingredientID = queryResult[0][0]
-                    insertString = "INSERT INTO recipe_ingredients (quantity, description, calling_recipe, called_ingredient) VALUES (%s, %s, %s, %s)"
-                    insertValues = [ingredient[0], ingredientDescription, recipeID, ingredientID]
-                    rowsAffected = saveConn.run_modify(insertString, insertValues)
+                    query_string = "SELECT ingredient_id FROM ingredient WHERE ingredient_name = %s;"
+                    query_values = [ingredient_name]
+                    query_result = save_conn.run_query(query_string, query_values)
+                    if (query_result == []):
+                        insert_string = "INSERT INTO ingredient (ingredient_name) VALUES (%s);"
+                        insert_values = [ingredient_name]
+                        save_conn.run_modify(insert_string, insert_values)
+                        query_string = "SELECT ingredient_id FROM ingredient WHERE ingredient_name = %s;"
+                        query_values = [ingredient_name]
+                        query_result = save_conn.run_query(query_string, query_values)
+                    ingredient_id = query_result[0][0]
+                    insert_string = "INSERT INTO recipe_ingredients (quantity, description, calling_recipe, called_ingredient) VALUES (%s, %s, %s, %s)"
+                    insert_values = [ingredient[0], ingredient_description, recipe_id, ingredient_id]
+                    rows_affected = save_conn.run_modify(insert_string, insert_values)
         else:
-            self.set_id(queryResult[0][0])
+            self.set_id(query_result[0][0])
 
-        return (rowsAffected == 1)
+        return (rows_affected == 1)
 
 
     def remove(self, user, pwd):
-        saveConn = Connection( user = user, pwd = pwd, db = "recipe_me" )
-        queryString = "DELETE FROM recipe WHERE recipe_id = %s;"
-        queryValues = [self.get_id()]
-        rowsAffected = saveConn.run_modify(queryString, queryValues)
-        return (rowsAffected == 1)
+        save_conn = Connection( user = user, pwd = pwd, db = "recipe_me" )
+        query_string = "DELETE FROM recipe WHERE recipe_id = %s;"
+        query_values = [self.get_id()]
+        rows_affected = save_conn.run_modify(query_string, query_values)
+        return (rows_affected == 1)
 
 
-    def load(self, id, user, pwd):
-        dbConn = Connection( user = user, pwd = pwd, db = "recipe_me" )
-        queryString = "SELECT * FROM recipe WHERE recipe_id = %s;"
-        queryValues = [id]
-        queryResult = dbConn.run_query(queryString, queryValues)
-        if (queryResult != None):
-            for (recipe_id, name, description, url, author, steps) in queryResult:
+    def load(self, user, pwd, id):
+        db_conn = Connection( user = user, pwd = pwd, db = "recipe_me" )
+        query_string = "SELECT * FROM recipe WHERE recipe_id = %s;"
+        query_values = [id]
+        query_result = db_conn.run_query(query_string, query_values)
+        if (query_result != None):
+            for (recipe_id, name, description, url, author, steps) in query_result:
                 self.set_id(recipe_id)
                 self.set_name(name)
                 self.set_description(description)
                 self.set_url(url)
                 self.set_author(author)
                 self.set_steps(steps)
-            queryString = "SELECT ri.quantity, ri.description, i.ingredient_name FROM recipe_ingredients ri INNER JOIN ingredient i ON ri.called_ingredient = i.ingredient_id WHERE calling_recipe = %s;"
-            queryValues = [id]
-            ingredientResult = dbConn.run_query(queryString, queryValues)
-            ingredientList = []
-            if (ingredientResult != None):
-                for (quantity, description, ingredient_name) in ingredientResult:
+            query_string = "SELECT ri.quantity, ri.description, i.ingredient_name FROM recipe_ingredients ri INNER JOIN ingredient i ON ri.called_ingredient = i.ingredient_id WHERE calling_recipe = %s;"
+            query_values = [id]
+            ingredient_result = db_conn.run_query(query_string, query_values)
+            ingredient_list = []
+            if (ingredient_result != None):
+                for (quantity, description, ingredient_name) in ingredient_result:
                     if description != '':
                         ingredient_name += ","+description
-                    ingredientList.append([quantity, ingredient_name])
-                self.set_ingredients(ingredientList)
+                    ingredient_list.append([quantity, ingredient_name])
+                self.set_ingredients(ingredient_list)
             return True
 
         return False

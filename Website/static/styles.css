@@ -1,0 +1,232 @@
+body {
+    background-color: #333;
+}
+
+#navbar {
+    background-color: #d52e18;
+    overflow: hidden;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 20px; /* Increased padding */
+    border-radius: 20px;
+    font-size: 18px; /* Set font size */
+    color: white;
+    text-decoration: none;
+    font-family: "Roboto Condensed-Regular", Helvetica;
+}
+
+#logo {
+    font-size: 24px; /* Increased font size */
+}
+
+#navbar-right {
+    font-family: "Roboto Condensed-Regular", Helvetica;
+}
+
+.bignavbutton {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 20px; /* Increased font size */
+    cursor: pointer;
+    padding: 10px 20px; /* Added padding */
+    border-radius: 20px;
+}
+
+.bignavbutton:hover {
+    background-color: #f17c04;
+}
+
+
+
+#logo:hover {
+    color: white; /* Ensuring the text color changes on hover */
+}
+
+#navbar-right a:hover {
+    background-color: #f17c04;
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+
+#navbar-right a:hover {
+    color: white; /* Ensuring the text color changes on hover */
+}
+
+#search-bar-container {
+    flex-grow: 1;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+#search-bar {
+    width: 100%;
+    max-width: 300px; 
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#search-button {
+    padding: 8px 16px;
+    margin-left: 8px; 
+    border: none;
+    border-radius: 4px;
+    background-color: #f68224; 
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#search-button:hover {
+    background-color: #fa7000; 
+}
+
+#tag-clouds {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 20px;
+    font-family: "Roboto Condensed", Helvetica;
+}
+
+.tag {
+    background-color: #d52e18;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tag:hover {
+    background-color: #bd0505;
+}
+
+.tag.selected {
+    background-color: #fa7000;
+}
+
+* {box-sizing:border-box}
+
+
+
+/* Center the sign-up box */
+.center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+}
+
+/* Box container styles */
+.box-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3); /* Box shadow */
+    max-width: 400px; /* Adjust as needed */
+    width: 100%;
+}
+
+/* Style the login background */
+.login-background {
+    background-color: #f0f0f0; /* Background color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3); /* Box shadow */
+    width: 100%;
+    text-align: center; /* Center text */
+}
+
+/* Center the sign-up box */
+.center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 115vh; /* Adjust as needed */
+}
+
+#navbar-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.background-image-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('test.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    opacity: 0.5; /* Adjust opacity to make the image faded */
+}
+
+#search-bar-container {
+    margin-top: 50px; /* Add margin to the top */
+}
+
+#tag-clouds {
+    margin-top: 20px; /* Add margin to the top */
+}
+.box {
+    width: 1198px;
+    height: 281px;
+  }
+  
+.box .welcome-block {
+    background-color: #FCFBF4;
+    position: fixed;
+    width: 800px;
+    height: 300px;
+    top: 25%;
+    left: 25%;
+    border-radius: 24px;
+    z-index: 1;
+}
+
+.welcome-block p {
+    text-align: center;
+    color:  #d52e18;
+    font-family: "Roboto Condensed", Helvetica;
+    font-size: 18px;
+}
+.photo-icon {
+    width: 100px;
+    height: 100px; 
+    border-radius: 50%; 
+    background-color: #ccc; 
+    margin-right: 20px;
+}
+
+.user {
+    font-family: "Roboto Condensed", Helvetica;
+}
+
+.favorited-recipes {
+    margin-top: 30px; 
+    font-family: "Roboto Condensed", Helvetica;
+}
+
+.recipe {
+    margin-bottom: 20px;
+}
+
+.recipe-title {
+    font-size: 18px; 
+    font-weight: bold;
+}
+
+.recipe-description {
+    font-size: 14px;
+    color: #555;
+}

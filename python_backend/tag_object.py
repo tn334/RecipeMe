@@ -28,41 +28,41 @@ class Tag:
         return self.__tagged_recipes
 
     def save(self, user, pwd):
-        rowsAffected = 0
-        saveConn = Connection( user = user, pwd = pwd, db = "recipe_me" )
-        queryString = "SELECT tag_name FROM tag WHERE tag_name = %s;"
-        queryValues = [self.get_name()]
-        queryResult = saveConn.run_query(queryString, queryValues)
-        if (queryResult == []):
-            insertString = "INSERT INTO tag (tag_name, description) VALUES (%s, %s);"
-            insertValues = [self.get_name(), self.get_description()]
-            rowsAffected = saveConn.run_modify(insertString, insertValues)
-            if (rowsAffected == 1):
-                for recipeID in self.get_tagged_recipes():
-                    insertString = "INSERT IGNORE INTO recipe_tags (tagged_recipe, attached_tag) VALUES (%s, %s);"
-                    insertValues = [recipeID, self.get_name()]
-                    rowsAffected = saveConn.run_modify(insertString, insertValues)
+        rows_affected = 0
+        save_conn = Connection( user = user, pwd = pwd, db = "recipe_me" )
+        query_string = "SELECT tag_name FROM tag WHERE tag_name = %s;"
+        query_values = [self.get_name()]
+        query_result = save_conn.run_query(query_string, query_values)
+        if (query_result == []):
+            insert_string = "INSERT INTO tag (tag_name, description) VALUES (%s, %s);"
+            insert_values = [self.get_name(), self.get_description()]
+            rows_affected = save_conn.run_modify(insert_string, insert_values)
+            if (rows_affected == 1):
+                for recipe_id in self.get_tagged_recipes():
+                    insert_string = "INSERT IGNORE INTO recipe_tags (tagged_recipe, attached_tag) VALUES (%s, %s);"
+                    insert_values = [recipe_id, self.get_name()]
+                    rows_affected = save_conn.run_modify(insert_string, insert_values)
 
-        return (rowsAffected == 1)
+        return (rows_affected == 1)
     
     def load(self, user, pwd, name):
-        dbConn = Connection( user = user, pwd = pwd, db = "recipe_me" )
-        queryString = "SELECT * FROM tag WHERE tag_name = %s;"
-        queryValues = [name]
-        queryResult = dbConn.run_query(queryString, queryValues)
-        if (queryResult != None):
-            for (name, description) in queryResult:
+        db_conn = Connection( user = user, pwd = pwd, db = "recipe_me" )
+        query_string = "SELECT * FROM tag WHERE tag_name = %s;"
+        query_values = [name]
+        query_result = db_conn.run_query(query_string, query_values)
+        if (query_result != None):
+            for (name, description) in query_result:
                 self.set_name(name)
                 self.set_description(description)
 
-            queryString = "SELECT tagged_recipe FROM recipe_tags WHERE attached_tag = %s;"
-            queryValues = [self.get_name()]
-            recipeResult = dbConn.run_query(queryString, queryValues)
-            recipeList = []
-            if (recipeResult != None):
-                for recipeID in recipeResult:
-                    recipeList.append(recipeID)
-                self.set_tagged_recipes(recipeList)
+            query_string = "SELECT tagged_recipe FROM recipe_tags WHERE attached_tag = %s;"
+            query_values = [self.get_name()]
+            recipe_result = db_conn.run_query(query_string, query_values)
+            recipe_list = []
+            if (recipe_result != None):
+                for recipe_id in recipe_result:
+                    recipe_list.append(recipe_id)
+                self.set_tagged_recipes(recipe_list)
             return True
 
         return False
